@@ -1,0 +1,46 @@
+<html>
+   <style>
+   
+   img {
+   width: 240px;
+   height: 40px;
+   }
+   
+   h1 {
+   font-family: Helvetica;
+   text-align: center;}
+   
+   div {
+   font-family: Helvetica;
+   padding: 10px;
+   border-radius: 15px;
+   background-color: #28aae0;
+   text-align: center;
+   margin: auto;
+   margin-top: 50px;
+   margin-bottom: 50px;
+   width: 500px;
+   box-shadow: 0px 10px 20px;
+   }
+   
+   </style>
+   <body>
+   <p> <a href="/"> <img src="/static/DNAnexus_logo.jpeg" alt="DNAnexus logo" width="240" height="40"> </a></p>
+   <h1> Query GWAS Results </h1>
+   
+   <div align = "center">
+      <form action = "http://localhost:5000/query/" method = "POST">
+         <h2> Enter Query </h2>
+         <p><input type = "text" name = "search_term" size=50 placeholder = "Search..."/></p>
+          <select   name="query" id="query">
+            <option value="variant">Variant</option>
+            <option value="gene">Gene</option>
+            <option value="trait">Trait</option>
+          </select>
+         <p><input type = "submit" name = "submit_button" value = "Submit" /></p>
+      </form>
+      
+   
+      
+   </body>
+</html>
