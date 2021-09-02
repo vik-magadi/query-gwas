@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+   <style>
+   
+   table {
+   font-family: Helvetica; 
+   border: 2px black;
+   border-collapse: collapse;
+   }
+   
+   table thead {
+   font-weight: bold;
+   background-color: #28aae0;
+   }
+   
+   table tr:nth-child(even) { 
+   background-color: #28aae0;
+   }
+   </style>
+    </head>
+   <body>
+      <p> <a href="/"> <img src="/static/DNAnexus_logo.jpeg" alt="DNAnexus logo" width="240" height="40"> </a></p>
+
+      <table id = "trait_table" class = "display" align = "center">
+
+         <thead>
+
+            <td>Gene</td>
+            <td>Variant</td>
+            <td>Chromosome</td>
+            <td>Position</td>
+            <td>Ref</td>
+            <td>Alt</td>
+            <td>P-value</td>
+            <td>Trait</td>
+            
+
+         </thead>
+
+         <tbody>
+
+         {% for row in rows %}
+
+            <tr>
+               {% set gene_url = "https://www.genecards.org/cgi-bin/carddisp.pl?gene=" + row["base__hugo"] %}
+              
+               <td><a href = {{gene_url}}>{{row["base__hugo"]}}</a></td>
+               <td>{{row["Name"]}}</td>
+               <td>{{row["Chr"]}}</td>
+               <td>{{row["Pos"]}}</td>
+               <td>{{row["Ref"]}}</td>
+               <td>{{row["Alt"]}}</td>
+               <td>{{row["Pval"]}}</td>
+                 {% set trait_url  =  "https://icdcodelookup.com/icd-10/codes/" + row["Trait"].split("_")[0] %}
+               
+               <td><a href = {{trait_url}}>{{row["Trait"]}}</a></td>
+
+            </tr>
+
+         {% endfor %}
+        </tbody>
+      </table>
+        <script>
+        $(document).ready( function () {
+        $('#trait_table').DataTable();
+        } );
+        </script>
+       {% set gene_name = rows[0]["base__hugo"] %}
+      <form action  = "/gene/plot/" method = "POST" align = "center">
+      <p><input type = "submit" name = "submit_button" value = "Render Plot" height = 30px width = 60px/></p>
+      <p><input type = "hidden" name = "gene_name" value = {{gene_name}} /></p>
+      </form>
+
+   </body>
+
+</html>
