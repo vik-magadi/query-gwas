@@ -1,0 +1,45 @@
+ {
+  "name": "query_gwas",
+  "title": "Query GWAS",
+  "summary": "Query and visualize GWAS results",
+  "version": "0.0.1",
+  "inputSpec":
+  [
+    {
+      "name": "db_id",
+      "label": "File ID of database",
+      "help": "File ID of database",
+      "class": "string",
+      "optional": false
+    },
+    {
+      "name": "txt_id",
+      "label": "File ID of regenie txt file",
+      "help": "File ID of regenie txt file",
+      "class": "string",
+      "optional": false
+    }
+  ],
+  "outputSpec": [],
+  "httpsApp": {
+      "ports": [443],
+      "shared_access": "VIEW"
+  },
+  "timeoutPolicy": {
+    "*": {
+      "hours": 1
+    }
+  },
+  "runSpec": {
+    "interpreter": "bash",
+    "file": "src/script.sh",
+    "distribution": "Ubuntu",
+    "release": "20.04",
+    "version": "0"
+    },
+   "access": {
+    "network": [
+      "*"
+    ]
+    }
+}
